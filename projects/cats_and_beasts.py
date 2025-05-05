@@ -33,3 +33,6 @@ class AnimalBlogger(AutoSimpleBlogger):
 def post():
     blogger = AnimalBlogger()
     blogger.post()
+
+if __name__ == "__main__":
+    post()

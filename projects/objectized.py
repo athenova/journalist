@@ -55,7 +55,7 @@ class Objectifised(Journalist):
         
     def _posters(self):
         return [
-            TelegramPoster(chat_id='@objectized', processor=tagadder),
+            TelegramPoster(chat_id='@objectized_the', processor=tagadder),
             VkPoster(group_id='230297352', processor=tagadder),
             # InstagramPoster(account_token_name='OBJECTIZED_TOKEN', account_id=None, processor=tagadder)
             # TelegramPoster(processor=tagadder)

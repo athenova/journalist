@@ -26,8 +26,8 @@ class SkillBlogger(AutoSimpleBlogger):
     
     def _posters(self):
         return [
-            # TelegramPoster(chat_id='@one_day_skill', processor=tagadder),
-            # VkPoster(group_id='229822298', processor=tagadder),
+            TelegramPoster(chat_id='@one_day_skill', processor=tagadder),
+            VkPoster(group_id='229822298', processor=tagadder),
             InstagramPoster(account_token_name='ONE_DAY_SKILL_TOKEN', account_id='9799308313442110', processor=tagadder)
         ]
 

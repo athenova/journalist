@@ -34,8 +34,8 @@ class AdventurerBlogger(AutoSimpleBlogger):
             InstagramPoster(account_token_name='PLACE_OF_INTEREST_THE_TOKEN', account_id='28685424414437375', processor=tagadder)
         ]
 
-    def __init__(self, posters=None, first_post_date=date(2025, 2, 23), force_rebuild=False):
-        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date, force_rebuild=force_rebuild)
+    def __init__(self, posters=None, first_post_date=date(2025, 2, 23)):
+        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
 
 def post():
     blogger = AdventurerBlogger()

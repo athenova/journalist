@@ -34,8 +34,8 @@ class ForceNexusBlogger(AutoSimpleBlogger):
             InstagramPoster(account_token_name='FORCE_NEXUS_THE_TOKEN', account_id='9642947449081447', processor=tagadder)
         ]
 
-    def __init__(self, posters=None, first_post_date=date(2025, 2, 24), force_rebuild=False):
-        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date, force_rebuild=force_rebuild)
+    def __init__(self, posters=None, first_post_date=date(2025, 2, 24)):
+        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
 
 def post():
     blogger = ForceNexusBlogger()

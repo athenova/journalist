@@ -28,9 +28,9 @@ class GamerBlogger(Journalist):
         self.category = category
         tagadder = TagAdder(['#игроман', '#игры', '#иллюстрации', *tags ])
         posters = [
-            # TelegramPoster(chat_id='@venatus_the', processor=tagadder),
-            # VkPoster(group_id='230445524', processor=tagadder),
-            TelegramPoster(processor=tagadder)
+            TelegramPoster(chat_id='@venatus_the', processor=tagadder),
+            VkPoster(group_id='230445524', processor=tagadder),
+            # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)
 

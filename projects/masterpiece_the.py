@@ -4,16 +4,16 @@ from simple_blogger.poster.vk import VkPoster
 from simple_blogger.preprocessor.text import TagAdder
 from simple_blogger.generator import TextGenerator
 from simple_blogger.generator.openai import GptImageGenerator
-from datetime import date
+from datetime import date, timedelta
 
-tagadder = TagAdder(['#иллюстрации', '#фантазии'])
+tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр'])
 
 class MasterpieceBlogger(AutoSimpleBlogger):
     def _tasks_file_path(self):
         return f"./files/masterpiece_the.json"
     
     def _message_prompt_constructor(self, task):
-        return f"{task['name']}, {task['author']}, {task['period']}. {task['location']}, {task['description']}"
+        return f"{task['name']}, {task['author']}, {task['period']}. {task['description']}"
     
     def _message_generator(self):
         return TextGenerator("Ты - профессиональный искусствовед")
@@ -31,11 +31,11 @@ class MasterpieceBlogger(AutoSimpleBlogger):
             # TelegramPoster(processor=tagadder),
         ]
 
-    def __init__(self, posters=None, first_post_date=date(2025, 5, 14), style=None):
+    def __init__(self, posters=None, first_post_date=None, style=None):
         self.style = style
         super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
 
-def post(offset=0):
+def post(offset=11):
     styles=[
         "Концептуальное искусство"
         "Поп-арт",
@@ -60,7 +60,7 @@ def post(offset=0):
         "Византийский",
         "Античная живопись",
     ]
-    start_date = date(2025, 5, 14)
+    start_date = date(2025, 5, 14)-timedelta(days=offset)
     today = date.today()
     index = ((today - start_date).days + offset) % len(styles)
     blogger = MasterpieceBlogger(first_post_date=start_date, style=styles[index])

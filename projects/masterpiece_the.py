@@ -6,8 +6,6 @@ from simple_blogger.generator import TextGenerator
 from simple_blogger.generator.openai import GptImageGenerator
 from datetime import date, timedelta
 
-tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр'])
-
 class MasterpieceBlogger(AutoSimpleBlogger):
     def _tasks_file_path(self):
         return f"./files/masterpiece_the.json"
@@ -22,9 +20,10 @@ class MasterpieceBlogger(AutoSimpleBlogger):
         return GptImageGenerator(api_key_name="GPT_API_KEY")
 
     def _image_prompt_constructor(self, task):
-        return f"Нарисуй картину '{task['name']}' автора '{task['author']}' в стиле {self.style}"
+        return f"Нарисуй картину '{task['name']}' автора '{task['author']}' в стиле {self.style[0]}"
         
     def _posters(self):
+        tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр', self.style[1]])
         return [
             TelegramPoster(chat_id='@masterpiece_the', processor=tagadder),
             VkPoster(group_id='229902850', processor=tagadder),
@@ -37,28 +36,28 @@ class MasterpieceBlogger(AutoSimpleBlogger):
 
 def post(offset=11):
     styles=[
-        "Концептуальное искусство"
-        "Поп-арт",
-        "Абстрактный экспрессионизм",
-        "Сюрреализм",
-        "Дадаизм",
-        "Супрематизм",
-        "Футуризм",
-        "Кубизм",
-        "Экспрессионизм",
-        "Фовизм",
-        "Модерн (Ар-нуво)",
-        "Постимпрессионизм",
-        "Импрессионизм",
-        "Реализм",
-        "Романтизм",
-        "Классицизм",
-        "Рококо",
-        "Барокко",
-        "Ренессанс",
-        "Готика",
-        "Византийский",
-        "Античная живопись",
+        ("Концептуальное искусство", "#концептуальное"),
+        ("Поп-арт", "#попарт"),
+        ("Абстрактный экспрессионизм", "#экспрессионизм"),
+        ("Сюрреализм", "#сюрреализм"),
+        ("Дадаизм", "#дадаизм"),
+        ("Супрематизм", "#супрематизм"),
+        ("Футуризм", "#футуризм"),
+        ("Кубизм", "#кубизм"),
+        ("Экспрессионизм", "#экспрессионизм"),
+        ("Фовизм", "#фовизм"),
+        ("Модерн (Ар-нуво)", "#модерн"),
+        ("Постимпрессионизм", "#постимпрессионизм"),
+        ("Импрессионизм", "#импрессионизм"),
+        ("Реализм", "#реализм"),
+        ("Романтизм", "#романтизм"),
+        ("Классицизм", "#классицизм"),
+        ("Рококо", "#рококо"),
+        ("Барокко", "#барокко"),
+        ("Ренессанс", "#ренессанс"),
+        ("Готика", "#готика"),
+        ("Византийский", "#византийский"),
+        ("Античная живопись", "#живопись"),
     ]
     start_date = date(2025, 5, 14)-timedelta(days=offset)
     today = date.today()

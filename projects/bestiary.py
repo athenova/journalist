@@ -19,7 +19,7 @@ class BestiaryBlogger(Journalist):
 
     def __init__(self, specie):
         self.specie = specie
-        tagadder = TagAdder(['#иллюстрации', '#фантазии'])
+        tagadder = TagAdder(['#иллюстрации', '#фантазии', '#бестиарий'])
         posters = [
             TelegramPoster(chat_id='@bestiary_the', processor=tagadder),
             VkPoster(group_id='230664245', processor=tagadder),

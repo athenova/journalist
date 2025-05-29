@@ -3,13 +3,12 @@ from simple_blogger.poster.instagram import InstagramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
-from simple_blogger.generator.openai import GptImageGenerator
-from simple_blogger.generator.deepseek import DeepSeekTextGenerator
+from simple_blogger.generator.openai import GptImageGenerator, OpenAiTextGenerator
 import datetime
 
 class BestiaryBlogger(Journalist):
     def _message_generator(self):
-        return DeepSeekTextGenerator('Ты - художник с образованием психолога, знакомый с современными мемами из интернета')
+        return OpenAiTextGenerator('Ты - художник с образованием психолога, знакомый с современными мемами из интернета')
     
     def _image_generator(self):
         return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй, как бы выглядело животное по описанию")

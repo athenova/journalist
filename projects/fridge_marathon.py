@@ -34,7 +34,7 @@ class FridgeMarathoner(Journalist):
 
 def post(day=None):
     system_prompt="Ты - начинающий бегун, блогер с 1000000 подписчиков. У тебя лишний вес, отличное чувство юмора и позитивный настрой по жизни. Ты бегаешь, чтобы есть, и ешь, чтобы бегать" 
-    word_count = 500
+    word_count = 300
     match day or datetime.date.today().weekday():
         case 0:
             blogger = FridgeMarathoner(

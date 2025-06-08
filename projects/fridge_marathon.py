@@ -2,7 +2,7 @@ from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
-from simple_blogger.generator.openai import OpenAiTextGenerator
+from simple_blogger.generator.openai import OpenAiTextGenerator, GptImageGenerator
 from simple_blogger.generator.deepseek import DeepSeekTextGenerator
 import datetime
 
@@ -13,6 +13,9 @@ class FridgeMarathoner(Journalist):
     def _message_generator(self):
         # return OpenAiTextGenerator(self.system_prompt)
         return DeepSeekTextGenerator(self.system_prompt)
+    
+    def _image_generator(self):
+        return GptImageGenerator(api_key_name="GPT_API_KEY")
     
     def _prompt_constructor(self, _):
         return self.prompt_constructor

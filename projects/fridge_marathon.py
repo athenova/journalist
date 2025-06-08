@@ -21,7 +21,7 @@ class FridgeMarathoner(Journalist):
         self.prompt_constructor = prompt_constructor
         tagadder = TagAdder(tags)
         posters = [
-            TelegramPoster(chat_id='fridgemarathon', processor=tagadder),
+            TelegramPoster(chat_id='@fridgemarathon', processor=tagadder),
             VkPoster(group_id='230800710', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]

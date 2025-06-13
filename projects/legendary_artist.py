@@ -1,40 +1,35 @@
-from simple_blogger.blogger.auto import AutoSimpleBlogger
 from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster
+from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
-from simple_blogger.generator import TextGenerator
-from simple_blogger.generator.openai import GptImageGenerator
+from simple_blogger.generator.openai import OpenAiTextGenerator, GptImageGenerator
+from simple_blogger.generator.yandex import YandexTextGenerator, YandexImageGenerator
 from datetime import date, timedelta
 
-class MasterpieceBlogger(AutoSimpleBlogger):
-    def _tasks_file_path(self):
-        return f"./files/masterpiece_the.json"
-    
-    def _message_prompt_constructor(self, task):
-        return f"{task['name']}, {task['author']}, {task['period']}. {task['description']}"
-    
+class LegendaryArtist(Journalist):
     def _message_generator(self):
-        return TextGenerator("Ты - профессиональный искусствовед")
+        return OpenAiTextGenerator("Ты - искусствовед-историк. Я дам тебе стиль в искусстве. Выбери известного художника, рисовавшего в этом стиле, приведи интерсный факт, связанный с этим художником. Используй не более 150 слов. Не используй 'Окей' и 'Конечно'")
+        # return YandexTextGenerator("Ты - искусствовед-историк. Я дам тебе стиль в искусстве. Выбери известного художника, рисовавшего в этом стиле, приведи интерсный факт, связанный с этим художником. Используй не более 150 слов. Не используй 'Окей' и 'Конечно'")
     
     def _image_generator(self):
-        return GptImageGenerator(api_key_name="GPT_API_KEY")
+        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй художника из описания")
+        # return YandexImageGenerator(system_prompt="Нарисуй художника из описания")
 
-    def _image_prompt_constructor(self, task):
-        return f"Нарисуй картину '{task['name']}' автора '{task['author']}' в стиле {self.style[0]}"
-        
-    def _posters(self):
-        tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр', self.style[1]])
-        return [
-            TelegramPoster(chat_id='@masterpiece_the', processor=tagadder),
-            VkPoster(group_id='229902850', processor=tagadder),
-            # TelegramPoster(processor=tagadder),
-        ]
+    def _prompt_constructor(self, _):
+        return self.style[0]
 
-    def __init__(self, posters=None, first_post_date=None, style=None):
+    def __init__(self, style):
         self.style = style
-        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
+        tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр', self.style[1]])
+        posters = [
+            TelegramPoster(chat_id='@masterpiece_the', processor=tagadder),
+            VkPoster(group_id='229902850', processor=tagadder)
+            # TelegramPoster(processor=tagadder)
+        ]
+        super().__init__(posters)
 
-def post(offset=11):
+
+def post(offset=0):
     styles=[
         ("Концептуальное искусство", "#концептуальное"),
         ("Поп-арт", "#попарт"),
@@ -59,10 +54,10 @@ def post(offset=11):
         ("Византийский", "#византийский"),
         ("Античная живопись", "#античнаяживопись"),
     ]
-    start_date = date(2025, 5, 14)-timedelta(days=offset)
+    start_date = date(2025, 6, 15)-timedelta(days=offset)
     today = date.today()
-    index = ((today - start_date).days + offset) % len(styles)
-    blogger = MasterpieceBlogger(first_post_date=start_date, style=styles[index])
+    index = ((today - start_date).days // 7 + offset) % len(styles)
+    blogger = LegendaryArtist(style=styles[index])
     blogger.post()
 
 if __name__ == "__main__":

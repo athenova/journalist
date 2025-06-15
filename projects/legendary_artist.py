@@ -20,7 +20,7 @@ class LegendaryArtist(Journalist):
 
     def __init__(self, style):
         self.style = style
-        tagadder = TagAdder(['#иллюстрации', '#фантазии', '#шедевр', self.style[1]])
+        tagadder = TagAdder(['#художник', '#великий', self.style[1]])
         posters = [
             TelegramPoster(chat_id='@masterpiece_the', processor=tagadder),
             VkPoster(group_id='229902850', processor=tagadder)

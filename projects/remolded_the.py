@@ -34,7 +34,7 @@ class SculptorBlogger(AutoSimpleBlogger):
         self.style = style
         super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
 
-def post(offset=28):
+def post(offset=0):
     styles=[
         ( "Конструктивизм", "#Конструктивизм" ),
         ( "Постмодернизм", "#Постмодернизм" ),

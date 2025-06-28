@@ -28,7 +28,7 @@ class HistorianBlogger(Journalist):
 
 def post(offset=0):
     tasks = json.load(open("./files/no_one_before.json", "rt", encoding="UTF-8"))
-    start_date = date(2025, 6, 25)-timedelta(days=offset)
+    start_date = date(2025, 6, 28)-timedelta(days=offset)
     today = date.today()
     index = ((today - start_date).days + offset) % len(tasks)
     blogger = HistorianBlogger(tasks[index])

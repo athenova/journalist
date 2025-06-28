@@ -33,7 +33,10 @@ class FridgeMarathoner(Journalist):
         super().__init__(posters)
 
 def post(day=None):
-    system_prompt="Ты - начинающий бегун, блогер с 1000000 подписчиков. У тебя лишний вес, отличное чувство юмора и позитивный настрой по жизни. Ты бегаешь, чтобы есть, и ешь, чтобы бегать" 
+    start_day = datetime.date(2025, 6, 8)
+    today = datetime.date.today()
+    day_count = (today - start_day).day
+    system_prompt=f"Ты - начинающий бегун, блогер с 1000000 подписчиков. У тебя лишний вес, отличное чувство юмора и позитивный настрой по жизни. Это твой {day_count} день бега. Ты бегаешь, чтобы есть, и ешь, чтобы бегать" 
     word_count = 150
     match day or datetime.date.today().weekday():
         case 0:

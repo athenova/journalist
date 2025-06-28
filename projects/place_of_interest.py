@@ -31,7 +31,7 @@ class AdventurerBlogger(AutoSimpleBlogger):
         return [
             TelegramPoster(chat_id='@place_of_interest', processor=tagadder),
             VkPoster(group_id='229821893', processor=tagadder),
-            InstagramPoster(account_token_name='PLACE_OF_INTEREST_THE_TOKEN', account_id='28685424414437375', processor=tagadder)
+            # InstagramPoster(account_token_name='PLACE_OF_INTEREST_THE_TOKEN', account_id='28685424414437375', processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 2, 23)):

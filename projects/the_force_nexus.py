@@ -31,7 +31,7 @@ class ForceNexusBlogger(AutoSimpleBlogger):
         return [
             TelegramPoster(chat_id='@the_force_nexus', processor=tagadder),
             VkPoster(group_id='229821912', processor=tagadder),
-            InstagramPoster(account_token_name='FORCE_NEXUS_THE_TOKEN', account_id='9642947449081447', processor=tagadder)
+            # InstagramPoster(account_token_name='FORCE_NEXUS_THE_TOKEN', account_id='9642947449081447', processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 2, 24)):

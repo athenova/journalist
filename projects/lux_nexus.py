@@ -28,7 +28,7 @@ class LuxNexusBlogger(AutoSimpleBlogger):
         return [
             TelegramPoster(chat_id='@lux_nexus', processor=tagadder),
             VkPoster(group_id='229822258', processor=tagadder),
-            InstagramPoster(account_token_name='LUX_NEXUS_TOKEN', account_id='9267090153358407', processor=tagadder)
+            # InstagramPoster(account_token_name='LUX_NEXUS_TOKEN', account_id='9267090153358407', processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 3, 4)):

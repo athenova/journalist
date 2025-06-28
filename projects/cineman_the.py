@@ -30,7 +30,7 @@ class CinemanBlogger(Journalist):
         posters = [
             TelegramPoster(chat_id='@cineman_the', processor=tagadder),
             VkPoster(group_id='230191211', processor=tagadder),
-            InstagramPoster(account_token_name='CINEMAN_THE_TOKEN', account_id='9573627319341163', processor=tagadder)
+            # InstagramPoster(account_token_name='CINEMAN_THE_TOKEN', account_id='9573627319341163', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)

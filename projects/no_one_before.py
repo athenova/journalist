@@ -20,7 +20,7 @@ class HistorianBlogger(Journalist):
         posters = [
             TelegramPoster(chat_id='@no_one_before', processor=tagadder),
             VkPoster(group_id='229838140', processor=tagadder),
-            InstagramPoster(account_token_name='NOONE_BEFORE_TOKEN', account_id='9635201363189685', processor=tagadder)
+            # InstagramPoster(account_token_name='NOONE_BEFORE_TOKEN', account_id='9635201363189685', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)

@@ -28,7 +28,7 @@ class TheoristBlogger(AutoSimpleBlogger):
         return [
             TelegramPoster(chat_id='@theory_the', processor=tagadder),
             VkPoster(group_id='229822056', processor=tagadder),
-            InstagramPoster(account_token_name='IN_THEORY_THE_TOKEN', account_id='9431105350315600', processor=tagadder)
+            # InstagramPoster(account_token_name='IN_THEORY_THE_TOKEN', account_id='9431105350315600', processor=tagadder)
         ]
 
     def __init__(self, posters=None):

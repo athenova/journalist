@@ -17,7 +17,7 @@ class LuxNexusBlogger(Journalist):
         posters = [
             TelegramPoster(chat_id='@lux_nexus', processor=tagadder),
             VkPoster(group_id='229822258', processor=tagadder),
-            InstagramPoster(account_token_name='LUX_NEXUS_TOKEN', processor=tagadder)
+            # InstagramPoster(account_token_name='LUX_NEXUS_TOKEN', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)

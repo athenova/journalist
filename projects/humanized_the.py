@@ -24,7 +24,7 @@ class HumanizedBlogger(Journalist):
         posters = [
             TelegramPoster(chat_id='@humanized_the', processor=tagadder),
             VkPoster(group_id='229862079', processor=tagadder),
-            InstagramPoster(account_token_name='HUMANIZED_THE_TOKEN', account_id='9396881250388941', processor=tagadder)
+            # InstagramPoster(account_token_name='HUMANIZED_THE_TOKEN', account_id='9396881250388941', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)

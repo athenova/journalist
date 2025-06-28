@@ -24,7 +24,7 @@ class AnimalBlogger(AutoSimpleBlogger):
         return [
             TelegramPoster(chat_id='@cats_and_beasts', processor=tagadder),
             VkPoster(group_id='229821868', processor=tagadder),
-            InstagramPoster(account_token_name='CATS_AND_BEASTS_TOKEN', account_id='10002961023067113', processor=tagadder)
+            # InstagramPoster(account_token_name='CATS_AND_BEASTS_TOKEN', account_id='10002961023067113', processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 3, 11)):

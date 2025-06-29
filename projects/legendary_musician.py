@@ -5,7 +5,7 @@ from simple_blogger.preprocessor.text import TagAdder
 from simple_blogger.generator.openai import OpenAiTextGenerator
 from datetime import date, timedelta
 
-class LegendaryCtoBlogger(Journalist):
+class LegendaryMusicianBlogger(Journalist):
     def _message_generator(self):
         return OpenAiTextGenerator("Я дам тебе имя известного музыканта. Приведи интересный факт, связанный с ним. Используй смайлики и не более 150 слов. Не используй 'Окей' и 'Конечно'")
     
@@ -187,7 +187,7 @@ def post(offset=0):
     start_date = date(2025, 7, 6)-timedelta(days=offset)
     today = date.today()
     index = ((today - start_date).days // 7 + offset) % len(tasks)
-    blogger = LegendaryCtoBlogger(tasks[index])
+    blogger = LegendaryMusicianBlogger(tasks[index])
     blogger.post()
 
 if __name__ == "__main__":

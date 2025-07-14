@@ -11,7 +11,7 @@ class BestiaryBlogger(Journalist):
         return OpenAiTextGenerator('Ты - художник с образованием психолога, знакомый с современными мемами из интернета')
     
     def _image_generator(self):
-        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй, как бы выглядело животное по описанию")
+        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй, как бы выглядело животное по описанию. Не рисуй текст")
 
     def _prompt_constructor(self, _):
         return f"Придумай смешное итальянское название для фантастического животного похожего на {self.specie} с телом в виде в виде выбранного рандомно неодушевлённого предмета, придумай его родословную. Используй смайлики и не более 150 слов, не используй 'Конечно' и 'Okей'"

@@ -16,7 +16,7 @@ class LegendaryDesigner(Journalist):
         self.task = task
         tagadder = TagAdder(['#design', '#дизайн', '#правик', '#креатив', '#макеты', '#шрифты', '#легенды'])
         posters = [
-            TelegramPoster(chat_id='@pixelinlaw', processor=tagadder),
+            TelegramPoster(chat_id='-1002633483480', processor=tagadder),
             VkPoster(group_id='230335670', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]

@@ -16,7 +16,7 @@ class LegendaryCtoBlogger(Journalist):
         self.task = task
         tagadder = TagAdder(['#cto', '#it', '#ит', '#айти', '#легенды'])
         posters = [
-            TelegramPoster(chat_id='@cto_in_fire', processor=tagadder),
+            TelegramPoster(chat_id='-1002319441307', processor=tagadder),
             VkPoster(group_id='229837981', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]

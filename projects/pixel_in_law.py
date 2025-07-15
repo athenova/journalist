@@ -28,7 +28,7 @@ class Designer(AutoSimpleBlogger):
         
     def _posters(self):
         return [
-            TelegramPoster(chat_id='@pixelinlaw', processor=tagadder),
+            TelegramPoster(chat_id='-1002633483480', processor=tagadder),
             VkPoster(group_id='230335670', processor=tagadder)
         ]
 

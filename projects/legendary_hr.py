@@ -16,7 +16,7 @@ class LegendaryHrBlogger(Journalist):
         self.task = task
         tagadder = TagAdder(['#hr', '#кадры', '#it', '#ит', '#айти', '#легенды'])
         posters = [
-            TelegramPoster(chat_id='@coffee_and_nerves', processor=tagadder),
+            TelegramPoster(chat_id='-1002353624049', processor=tagadder),
             VkPoster(group_id='229838019', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]

@@ -28,7 +28,7 @@ class HrBlogger(AutoSimpleBlogger):
         
     def _posters(self):
         return [
-            TelegramPoster(chat_id='@coffee_and_nerves', processor=tagadder),
+            TelegramPoster(chat_id='-1002353624049', processor=tagadder),
             VkPoster(group_id='229838019', processor=tagadder)
         ]
 

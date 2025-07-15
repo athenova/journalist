@@ -16,7 +16,7 @@ class LegendaryPmBlogger(Journalist):
         self.task = task
         tagadder = TagAdder(['#pm', '#projectmanagement', '#it', '#ит', '#айти', '#проблемы', '#легенды'])
         posters = [
-            TelegramPoster(chat_id='@verge_of_breakdown', processor=tagadder),
+            TelegramPoster(chat_id='-1002360664560', processor=tagadder),
             VkPoster(group_id='229837997', processor=tagadder)
             # TelegramPoster(processor=tagadder)
         ]

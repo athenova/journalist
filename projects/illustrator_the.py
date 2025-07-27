@@ -30,7 +30,7 @@ class Illustrator(Journalist):
         super().__init__(posters)
 
 def post():
-    start_day = datetime.date(2025, 7, 27)
+    start_day = datetime.date(2025, 7, 28)
     today = datetime.date.today()
     day_count = (today - start_day).days
     tasks = json.load(open("./files/illustrator_the.json", "rt", encoding="UTF-8"))

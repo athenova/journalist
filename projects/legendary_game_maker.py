@@ -19,9 +19,9 @@ class LegendaryGameBlogger(Journalist):
         self.task = task
         tagadder = TagAdder(['#геймер', '#игры', '#знаменитости', f"#{task["profession"]}"])
         posters = [
-            # TelegramPoster(chat_id='@venatus_the', processor=tagadder),
-            # VkPoster(group_id='230445524', processor=tagadder),
-            TelegramPoster(processor=tagadder)
+            TelegramPoster(chat_id='@venatus_the', processor=tagadder),
+            VkPoster(group_id='230445524', processor=tagadder),
+            # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)
 

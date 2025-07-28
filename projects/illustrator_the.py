@@ -20,7 +20,7 @@ class Illustrator(Journalist):
 
     def __init__(self, task):
         self.task = task
-        tagadder = TagAdder(['#иллюстрации', '#книги', '#литература', task['tag']])
+        tagadder = TagAdder(['#иллюстрации', '#книги', '#литература', f"#{task['genre']}"])
         posters = [
             TelegramPoster(chat_id='@illustrator_the', processor=tagadder),
             VkPoster(group_id='229821765', processor=tagadder),
@@ -30,7 +30,7 @@ class Illustrator(Journalist):
         super().__init__(posters)
 
 def post():
-    start_day = datetime.date(2025, 7, 28)
+    start_day = datetime.date(2025, 7, 29)
     today = datetime.date.today()
     day_count = (today - start_day).days
     tasks = json.load(open("./files/illustrator_the.json", "rt", encoding="UTF-8"))

@@ -9,11 +9,11 @@ import json
 
 class LegendaryArtist(Journalist):
     def _message_generator(self):
-        return OpenAiTextGenerator("Ты - искусствовед-историк. Я дам тебе имя известного художника и стиль. Используй не более 150 слов. Не используй 'Окей' и 'Конечно'")
+        return OpenAiTextGenerator("Ты - искусствовед-историк. Я дам тебе имя известного художника и стиль. Используй не более 150 слов, приведи интерсный факт, связанный с этим художником. Не используй 'Окей' и 'Конечно'")
         # return YandexTextGenerator("Ты - искусствовед-историк. Я дам тебе стиль в искусстве. Выбери известного художника, рисовавшего в этом стиле, приведи интерсный факт, связанный с этим художником. Используй не более 150 слов. Не используй 'Окей' и 'Конечно'")
     
     def _image_generator(self):
-        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй художника из описания")
+        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй художника из описания", style_prompt=f"Стиль - {self.task['genre']}")
         # return YandexImageGenerator(system_prompt="Нарисуй художника из описания")
 
     def _prompt_constructor(self, _):

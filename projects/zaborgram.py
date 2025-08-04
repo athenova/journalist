@@ -14,8 +14,8 @@ class WriterBlogger(Journalist):
         # return DeepSeekTextGenerator('Ты - граффити-райтер')
     
     def _image_generator(self):
-        return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй граффити, вдохновлённое описанием")
-        # return YandexImageGenerator(system_prompt="Нарисуй граффити, вдохновлённое описанием")
+        # return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй граффити, вдохновлённое описанием")
+        return YandexImageGenerator(system_prompt="Нарисуй граффити, вдохновлённое описанием")
     
     def _prompt_constructor(self, _):
         return f"Опиши граффити '{self.task['graf']}' райтера {self.task['artist']}, используй не более 100 слов, используй смайлики и не более 150 слов, не используй 'Конечно' и 'Okей'"

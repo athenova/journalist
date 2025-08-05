@@ -9,8 +9,8 @@ from datetime import date
 
 class HumanizedBlogger(Journalist):
     def _message_generator(self):
-        # return GptImageGenerator('Ты - художник с образованием психолога')
-        return OpenAiTextGenerator('Ты - художник с образованием психолога. Я дам тебе категорию и элемент категории. Опиши элемент, как если бы он был человеком', api_key_name="GPT_API_KEY")
+        # return GptImageGenerator("Ты - художник с образованием психолога. Я дам тебе категорию и элемент категории. Опиши элемент, как если бы он был человеком , используй не более 100 слов, используй смайлики и не более 150 слов, не используй 'Конечно' и 'Okей'")
+        return OpenAiTextGenerator("Ты - художник с образованием психолога. Я дам тебе категорию и элемент категории. Опиши элемент, как если бы он был человеком , используй не более 100 слов, используй смайлики и не более 150 слов, не используй 'Конечно' и 'Okей'", api_key_name="GPT_API_KEY")
     
     def _image_generator(self):
         return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй, как бы выглядел человек по описанию")

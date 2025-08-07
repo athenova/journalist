@@ -8,9 +8,6 @@ from simple_blogger.generator.yandex import YandexImageGenerator, YandexTextGene
 import datetime, json
 
 class CtoBlogger(Journalist):
-    # def _system_prompt(self):
-    #     return 'Ты - меломан'
-
     def _message_generator(self):
         return OpenAiTextGenerator('Ты - технический директор, лидер команды со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
         # return YandexTextGenerator('Ты - технический директор, лидер команды со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')

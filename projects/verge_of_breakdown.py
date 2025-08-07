@@ -1,42 +1,40 @@
-from simple_blogger.blogger.auto import AutoSimpleBlogger
 from simple_blogger.poster.telegram import TelegramPoster
+from simple_blogger.poster.instagram import InstagramPoster
 from simple_blogger.poster.vk import VkPoster
+from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
 from simple_blogger.generator.openai import OpenAiTextGenerator, OpenAiImageGenerator
-from datetime import date
+from simple_blogger.generator.yandex import YandexImageGenerator, YandexTextGenerator
+import datetime, json
 
-tagadder = TagAdder(['#pm', '#projectmanagement', '#it', '#ит', '#айти', '#проблемы', '#решения'])
-
-class PmBlogger(AutoSimpleBlogger):
-    def _tasks_file_path(self):
-        return f"./files/verge_of_breakdown.json"
-    
-    def _system_prompt(self):
-        return f"Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора"
-    
-    def _message_prompt_constructor(self, task):
-        return f"Выбери рандомно актуальную проблему по теме '{task['topic']}' из области '{task['category']}', опиши проблему, выбери рандомно метод решения, опиши метод решения, используй смайлики, используй менее 100 слов"
-    
-    def _image_prompt_constructor(self, task):
-        return f"Нарисуй картинку, вдохновлённую темой '{task['topic']}' из области '{task['category']}'"
-    
+class PmBlogger(Journalist):
     def _message_generator(self):
-        return OpenAiTextGenerator(self._system_prompt())
+        return OpenAiTextGenerator('Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
+        # return YandexTextGenerator('Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
     
     def _image_generator(self):
-        return OpenAiImageGenerator()
-        
-    def _posters(self):
-        return [
+        # return YandexImageGenerator(style_prompt='Нарисуй рисунок, вдохновлённый проблемой из описания. Не рисуй текст')
+        return OpenAiImageGenerator(system_prompt="Нарисуй рисунок, вдохновлённый проблемой из описания. Не рисуй текст")
+
+    def _prompt_constructor(self, _):
+        return f"Опиши проблему '{self.task['problem']}' из категории '{self.task['category']}', выбери метод решения, опиши метод решения, используй смайлики, используй менее 100 слов"
+
+    def __init__(self, task):
+        self.task = task
+        tagadder = TagAdder(['#pm', '#projectmanagement', '#it', '#ит', '#айти', '#проблемы', '#решения', f"#{task['category']}"])
+        posters = [
             TelegramPoster(chat_id='-1002360664560', processor=tagadder),
-            VkPoster(group_id='229837997', processor=tagadder)
+            VkPoster(group_id='229837997', processor=tagadder),
+            # TelegramPoster(processor=tagadder)
         ]
+        super().__init__(posters)
 
-    def __init__(self, posters=None, first_post_date=date(2025, 3, 4)):
-        super().__init__(posters=posters or self._posters(), first_post_date=first_post_date)
-
-def post():
-    blogger = PmBlogger()
+def post(offset=0):
+    start_date = datetime.date(2025, 8, 7)
+    today = datetime.date.today()
+    tasks = json.load(open("./files/verge_of_breakdown.json", "rt", encoding="UTF-8"))
+    index = ((today - start_date).days + offset) % len(tasks)
+    blogger = PmBlogger(tasks[index])
     blogger.post()
 
 if __name__ == "__main__":

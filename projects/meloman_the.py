@@ -17,7 +17,7 @@ class MelomanBlogger(Journalist):
     
     def _image_generator(self):
         # return YandexImageGenerator(style_prompt='Стиль мультяшный, анимация в стиле Хидэтака Миядзаки')
-        return OpenAiImageGenerator(system_prompt="Нарисуй рисунок, вдохновлённый песней из описания. Не рисуй текст")
+        return OpenAiImageGenerator(system_prompt="Нарисуй рисунок, вдохновлённый песней из описания", style_prompt="Не рисуй текст")
 
     def _prompt_constructor(self, _):
         return f"Опиши песню '{self.task['song']}' артиста '{self.task['artist']}' из категории '{self.task['genre']}', расскажи интересный факт о песне. Используй смайлики и не более 150 слов."

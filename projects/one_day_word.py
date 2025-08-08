@@ -1,5 +1,4 @@
-from datetime import datetime
-import json
+import json, datetime
 from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.blogger import Journalist
@@ -32,7 +31,7 @@ def post(offset=0):
     today = datetime.date.today()
     tasks = json.load(open("./files/one_day_word.json", "rt", encoding="UTF-8"))
     index = ((today - start_date).days + offset) % len(tasks)
-    blogger = WordBlogger()
+    blogger = WordBlogger(tasks[index])
     blogger.post()
 
 if __name__ == "__main__":

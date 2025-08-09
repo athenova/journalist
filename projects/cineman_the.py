@@ -27,7 +27,7 @@ class CinemanBlogger(Journalist):
 
     def __init__(self, task):
         self.task = task
-        tagadder = TagAdder(['#киноман', '#кино', '#иллюстрации', f"{task['genre']}" ])
+        tagadder = TagAdder(['#киноман', '#кино', '#иллюстрации', f"#{task['genre']}" ])
         posters = [
             TelegramPoster(chat_id='@cineman_the', processor=tagadder),
             VkPoster(group_id='230191211', processor=tagadder),

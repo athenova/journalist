@@ -32,7 +32,7 @@ class WriterBlogger(Journalist):
         super().__init__(posters)
 
 def post():
-    start_day = datetime.date(2025, 8, 4)
+    start_day = datetime.date(2025, 8, 3)
     today = datetime.date.today()
     day_count = int((today - start_day).days // 3.5)
     tasks = json.load(open("./files/zaborgram.json", "rt", encoding="UTF-8"))

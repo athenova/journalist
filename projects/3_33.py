@@ -1,15 +1,24 @@
+from email.errors import MessageError
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.generator.deepseek import DeepSeekTextGenerator
 from simple_blogger.generator.openai import GptImageGenerator
 from simple_blogger.preprocessor.text import TagAdder
 from simple_blogger.blogger import Journalist
-import json
+from simple_blogger.preprocessor.text import ITextProcessor, SerialProcessor
+import json, re
 from datetime import date
+
+class OkCleaner(ITextProcessor):        
+    def process(self, message:str)->str:
+        m = message.lower()
+        if m.startswith('конечно') or m.startswith('ok'):
+            m = re.sub(r'\A[^.!&]+.', '', message)
+        return re.sub(r'\A\s+', '', m)
 
 class HorrorWriter(Journalist):
     def _message_generator(self):
-        # return OpenAiTextGenerator("Ты - писатель. Специализируешься на хоррорах. Я буду давать тебе тему, жанр и автора. Придумай небольшой хоррор-рассказ на заданную тему, в заданном жанре, в стиле заданного автора. Не используй 'Конечно' и 'Okей'")
-        return DeepSeekTextGenerator("Ты - писатель. Специализируешься на хоррорах. Я буду давать тебе тему, жанр и автора. Придумай небольшой хоррор-рассказ на заданную тему, в заданном жанре, в стиле заданного автора. Не используй 'Конечно' и 'Okей'")
+        # return OpenAiTextGenerator("Ты - писатель. Специализируешься на хоррорах. Я буду давать тебе тему, жанр и автора. Придумай небольшой хоррор-рассказ на заданную тему, в заданном жанре, в стиле заданного автора.")
+        return DeepSeekTextGenerator("Ты - писатель. Специализируешься на хоррорах. Я буду давать тебе тему, жанр и автора. Придумай небольшой хоррор-рассказ на заданную тему, в заданном жанре, в стиле заданного автора.")
     
     def _image_generator(self):
         return GptImageGenerator(api_key_name="GPT_API_KEY", system_prompt="Нарисуй обложку для рассказа")
@@ -22,8 +31,8 @@ class HorrorWriter(Journalist):
         self.author = author
         tagadder = TagAdder(['#at_3_33am', '#ужасы', f"#{task["genre"].replace(' ', '').replace('-', '')}".lower()])
         posters = [
-            # VkPoster(processor=tagadder)
-            VkPoster(group_id='232393870', processor=tagadder)
+            # VkPoster(processor=SerialProcessor([OkCleaner(), tagadder]))
+            VkPoster(group_id='232393870', processor=SerialProcessor([OkCleaner(), tagadder]))
         ]
         super().__init__(posters)
 

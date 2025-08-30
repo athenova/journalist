@@ -10,10 +10,9 @@ from datetime import date
 
 class OkCleaner(ITextProcessor):        
     def process(self, message:str)->str:
-        m = message.lower()
-        if m.startswith('конечно') or m.startswith('ok'):
-            m = re.sub(r'\A[^.!&]+.', '', message)
-        return re.sub(r'\A\s+', '', m)
+        if re.match(r'\Aконечно|ок', message, re.IGNORECASE):
+            message = re.sub(r'\A[^.!&]+.', '', message)
+        return re.sub(r'\A\s+', '', message)
 
 class HorrorWriter(Journalist):
     def _message_generator(self):

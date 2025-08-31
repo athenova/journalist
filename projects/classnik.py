@@ -23,8 +23,8 @@ class SchoolBlogger(Journalist):
 
     def __init__(self, path: str, post_days: array.array):
         today = date.today()
-        # start_date = date(2025, 9, 1)
-        start_date = date(2025, 8, 18)
+        start_date = date(2025, 9, 1)
+        # start_date = date(2025, 8, 18)
         week =  (today - start_date).days // 7
         weekday_index = post_days.index(today.weekday() + 1)
         index = week * len(post_days) + weekday_index
@@ -32,9 +32,9 @@ class SchoolBlogger(Journalist):
         self.task = tasks[index]
         tagadder = TagAdder(['#школа', '#6класс', '#учёба', f"#{self.task["category"].replace(' ', '')}".lower()])
         posters = [
-            # TelegramPoster(chat_id='@class5nik', processor=tagadder),
-            # VkPoster(group_id='229821544', processor=tagadder),
-            TelegramPoster(processor=tagadder)
+            TelegramPoster(chat_id='@class5nik', processor=tagadder),
+            VkPoster(group_id='229821544', processor=tagadder),
+            # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)
 

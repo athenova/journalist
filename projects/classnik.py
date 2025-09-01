@@ -1,4 +1,3 @@
-from email.policy import default
 import array, json
 from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster

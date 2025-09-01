@@ -37,10 +37,10 @@ class SchoolBlogger(Journalist):
         ]
         super().__init__(posters)
 
-def post(offset='bio1'):
+def post(index='bio1'):
     try:
         post_days = None
-        match offset:
+        match index:
             case "bio1" | "bio3" | "bio3" | "bio4" : post_days = [2]
             case "ru_history1" | "ru_history3" | "ru_history3" | "ru_history4" : post_days = [1]
             case "history1" | "history2" | "history3" | "history4" : post_days = [5]
@@ -49,8 +49,8 @@ def post(offset='bio1'):
             case "litra3" | "litra4" : post_days = [1, 5]
             case "rus1" | "rus2" : post_days = [1, 2, 3, 4]
             case "rus3" | "rus4" : post_days = [1, 3, 5]
-            case _: raise ValueError("Offset not found")
-        blogger = SchoolBlogger(path=offset, post_days=post_days)
+            case _: raise ValueError("Index not found")
+        blogger = SchoolBlogger(path=index, post_days=post_days)
         blogger.post()
     except ValueError:
         pass

@@ -1,3 +1,4 @@
+from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
@@ -5,7 +6,7 @@ from simple_blogger.generator.openai import OpenAiTextGenerator, GptImageGenerat
 from simple_blogger.generator.deepseek import DeepSeekTextGenerator
 import datetime, json
 
-class HippoBiker(Journalist):
+class GymCouch(Journalist):
     # def _system_prompt(self):
     #     return self.system_prompt
 
@@ -25,79 +26,80 @@ class HippoBiker(Journalist):
         self.image_prompt = image_prompt
         tagadder = TagAdder(tags)
         posters = [
-            VkPoster(group_id='232042016', processor=tagadder)
-            # VkPoster(, processor=tagadder)
+            TelegramPoster(chat_id='@gymcouch', processor=tagadder),
+            VkPoster(group_id='231578484', processor=tagadder)
+            # TelegramPoster(processor=tagadder)
         ]
         super().__init__(posters)
 
 def post(day=None):
-    start_day = datetime.date(2025, 9, 8)
+    start_day = datetime.date(2025, 7, 15)
     today = datetime.date.today()
     day_count = (today - start_day).days
     index = day_count // 7
-    system_prompt=f"Ты - начинающий велосипедист, мужчина, блогер с 1000000 подписчиков. У тебя лишний вес, отличное чувство юмора и позитивный настрой по жизни. Это твой {day_count} день на велосипеде. Ты тренируешься, чтобы есть, и ешь, чтобы тренироваться" 
+    system_prompt=f"Ты - начинающий атлет, мужчина, блогер с 1000000 подписчиков. У тебя лишний вес, отличное чувство юмора и позитивный настрой по жизни. Это твой {day_count} день в тренажёрном зале. Ты тренируешься, чтобы есть, и ешь, чтобы тренироваться" 
     word_count = 150
     match day or (datetime.date.today().weekday() + 6) % 7:
         case 0:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker1.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sportsgym_couch1.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Расскажи про свою экипировку - {task['equip']}. Посмейся над собой, не комплексуй, расскажи почему очень круто быть тобой. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй человека по описанию",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ТелоСлучайностьДухРешает']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#ТелоСлучайностьДухРешает']
             )
         case 1:
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Расскажи про свою маленькую победу на тренировке. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй рисунок, вдохновлённый победой из описания",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ПобедаНаВесахДуши']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#ПобедаНаВесахДуши']
             )
         case 2:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker3.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sportsgym_couch3.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Расскажи про профилактику травмы '{task['injury']}'. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй рисунок, вдохновлённый профилактикой травмы из описания, не рисуй текст",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ВелБезСлез']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#ТреняБезСлез']
             )
         case 3:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker4.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sportsgym_couch4.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Посмейся над темой '{task['theme']}'. Расскажи, почему она для тебя актуальна. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй рисунок, вдохновлённый темой из описания, не рисуй текст",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ВелПротивСтереотипов']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#ТреняПротивСтереотипов']
             )
         case 4:
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Расскажи про тренировку, которая сделала тебя лучше. Фокус на здоровье, а не на весах. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй рисунок, вдохновлённый тренировкой из описания, не рисуй текст",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#НеВесАЖизнь']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#НеВесАЖизнь']
             )
         case 5:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker6.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sportsgym_couch6.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
                 f"Сегодня день чит-мил. Расскажи историю блюда '{task['food']}' и о том, как ты, смакуя, съел его после тренировки. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй блюдо из описания, не рисуй текст",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#НакрутилНаСъел']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#НатренилНаСъел']
             )
         case 6:
-            blogger = HippoBiker(
+            blogger = GymCouch(
                 system_prompt, 
-                f"Придумай креативную, смешную отмазку, почему ты приехал последним на групповой тренировке. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
+                f"Придумай креативную, смешную отмазку, почему ты не пришёл сегодня на тренировку. Используй смайлики и не более {word_count} слов. Не используй 'Окей' и 'Конечно'",
                 "Нарисуй рисунок, вдохновлённый темой из описания, не рисуй текст",
-                ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ВелДляДушиАНеДляПодиума']
+                ['#Фитнес', '#Диван', '#СпортДляВсех', '#ТреняДляДушиАНеДляПодиума']
             )
     blogger.post()
 

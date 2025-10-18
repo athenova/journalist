@@ -39,7 +39,7 @@ def post(day=None):
     word_count = 150
     match day or (datetime.date.today().weekday() + 6) % 7:
         case 0:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker1.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/hippobiker/hippobiker1.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = HippoBiker(
@@ -56,7 +56,7 @@ def post(day=None):
                 ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ПобедаНаВесахДуши']
             )
         case 2:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker3.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/hippobiker/hippobiker3.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = HippoBiker(
@@ -66,7 +66,7 @@ def post(day=None):
                 ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#ВелБезСлез']
             )
         case 3:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker4.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/hippobiker/hippobiker4.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = HippoBiker(
@@ -83,7 +83,7 @@ def post(day=None):
                 ['#Велосипед', '#ВелоПуть', '#СпортДляВсех', '#НеВесАЖизнь']
             )
         case 5:
-            tasks = json.load(open("./files/sportshippobiker/hippobiker6.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/hippobiker/hippobiker6.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = HippoBiker(

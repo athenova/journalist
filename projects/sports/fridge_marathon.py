@@ -41,7 +41,7 @@ def post(day=None):
     word_count = 150
     match day or datetime.date.today().weekday():
         case 0:
-            tasks = json.load(open("./files/sports/fridge_marathon1.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/fridge_marathon/fridge_marathon1.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = FridgeMarathoner(
@@ -58,7 +58,7 @@ def post(day=None):
                 ['#Марафон', '#Холодильник', '#СпортДляВсех', '#ПобедаНаВесахДуши']
             )
         case 2:
-            tasks = json.load(open("./files/sports/fridge_marathon3.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/fridge_marathon/fridge_marathon3.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = FridgeMarathoner(
@@ -68,7 +68,7 @@ def post(day=None):
                 ['#Марафон', '#Холодильник', '#СпортДляВсех', '#БегБезСлез']
             )
         case 3:
-            tasks = json.load(open("./files/sports/fridge_marathon4.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/fridge_marathon/fridge_marathon4.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = FridgeMarathoner(
@@ -85,7 +85,7 @@ def post(day=None):
                 ['#Марафон', '#Холодильник', '#СпортДляВсех', '#НеВесАЖизнь']
             )
         case 5:
-            tasks = json.load(open("./files/sports/fridge_marathon6.json", "rt", encoding="UTF-8"))
+            tasks = json.load(open("./files/sports/fridge_marathon/fridge_marathon6.json", "rt", encoding="UTF-8"))
             index = index % len(tasks)
             task = tasks[index]
             blogger = FridgeMarathoner(

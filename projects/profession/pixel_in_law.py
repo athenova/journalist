@@ -15,7 +15,7 @@ class Designer(AutoSimpleBlogger):
         return f"Ты - профессиональный дизайнер, лидер команды со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора"
     
     def _message_prompt_constructor(self, task):
-        return f"Выбери рандомно актуальную проблему по теме '{task['topic']}' из области '{task['category']}', опиши проблему, выбери рандомно метод решения, опиши метод решения, используй смайлики, используй менее 100 слов"
+        return f"Выбери рандомно актуальную проблему по теме '{task['topic']}' из области '{task['category']}', опиши проблему, выбери рандомно метод решения, опиши метод решения, используй смайлики, используй менее 150 слов"
     
     def _image_prompt_constructor(self, task):
         return f"Нарисуй картинку, вдохновлённую темой '{task['topic']}' из области '{task['category']}'"
@@ -25,9 +25,9 @@ class Designer(AutoSimpleBlogger):
     
     def _posters(self):
         return [
-            # TelegramPoster(chat_id='-1002633483480', processor=tagadder),
-            # VkPoster(group_id='230335670', processor=tagadder),
-            TelegramPoster(processor=tagadder)
+            TelegramPoster(chat_id='-1002633483480', processor=tagadder),
+            VkPoster(group_id='230335670', processor=tagadder),
+            # TelegramPoster(processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 5, 2)):

@@ -2,7 +2,7 @@ from simple_blogger.blogger.auto import AutoSimpleBlogger
 from simple_blogger.poster.telegram import TelegramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.preprocessor.text import TagAdder
-from simple_blogger.generator.openai import OpenAiTextGenerator, OpenAiImageGenerator
+from simple_blogger.generator.deepseek import DeepSeekTextGenerator
 from datetime import date
 
 tagadder = TagAdder(['#design', '#шрифты', '#правик', '#креатив', '#макеты', '#проблемы', '#решения'])
@@ -21,15 +21,13 @@ class Designer(AutoSimpleBlogger):
         return f"Нарисуй картинку, вдохновлённую темой '{task['topic']}' из области '{task['category']}'"
     
     def _message_generator(self):
-        return OpenAiTextGenerator(self._system_prompt())
+        return DeepSeekTextGenerator(self._system_prompt())
     
-    def _image_generator(self):
-        return OpenAiImageGenerator()
-        
     def _posters(self):
         return [
-            TelegramPoster(chat_id='-1002633483480', processor=tagadder),
-            VkPoster(group_id='230335670', processor=tagadder)
+            # TelegramPoster(chat_id='-1002633483480', processor=tagadder),
+            # VkPoster(group_id='230335670', processor=tagadder),
+            TelegramPoster(processor=tagadder)
         ]
 
     def __init__(self, posters=None, first_post_date=date(2025, 5, 2)):

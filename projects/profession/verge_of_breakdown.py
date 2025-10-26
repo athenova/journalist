@@ -3,21 +3,19 @@ from simple_blogger.poster.instagram import InstagramPoster
 from simple_blogger.poster.vk import VkPoster
 from simple_blogger.blogger import Journalist
 from simple_blogger.preprocessor.text import TagAdder
-from simple_blogger.generator.openai import OpenAiTextGenerator, OpenAiImageGenerator
-from simple_blogger.generator.yandex import YandexImageGenerator, YandexTextGenerator
+from simple_blogger.generator.deepseek import DeepSeekTextGenerator
+from simple_blogger.generator.yandex import YandexImageGenerator
 import datetime, json
 
 class PmBlogger(Journalist):
     def _message_generator(self):
-        return OpenAiTextGenerator('Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
-        # return YandexTextGenerator('Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
+        return DeepSeekTextGenerator('Ты - проектный менеджер, лидер проекта со 100% харизмой, всегда оптимистично настроенный и с отличным чувством юмора')
     
     def _image_generator(self):
-        # return YandexImageGenerator(style_prompt='Нарисуй рисунок, вдохновлённый проблемой из описания. Не рисуй текст')
-        return OpenAiImageGenerator(system_prompt="Нарисуй рисунок, вдохновлённый проблемой из описания. Не рисуй текст")
+        return YandexImageGenerator(style_prompt='Нарисуй рисунок, вдохновлённый проблемой из описания. Не рисуй текст')
 
     def _prompt_constructor(self, _):
-        return f"Опиши проблему '{self.task['problem']}' из категории '{self.task['category']}', выбери метод решения, опиши метод решения, используй смайлики, используй менее 100 слов"
+        return f"Опиши проблему '{self.task['problem']}' из категории '{self.task['category']}', выбери метод решения, опиши метод решения, используй смайлики, используй менее 150 слов"
 
     def __init__(self, task):
         self.task = task

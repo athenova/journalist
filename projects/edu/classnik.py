@@ -22,8 +22,10 @@ class SchoolBlogger(Journalist):
 
     def __init__(self, path: str, post_days: array.array):
         today = date.today()
-        start_date = date(2025, 9, 1)
-        # start_date = date(2025, 8, 18)
+        # start_date = date(2025, 9, 1)
+        start_date = date(2025, 11, 3)
+        # start_date = date(2026, 1, 12)
+        # start_date = date(2026, 4, 6)
         week =  (today - start_date).days // 7
         weekday_index = post_days.index(today.weekday() + 1)
         index = week * len(post_days) + weekday_index
